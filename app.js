@@ -60,6 +60,7 @@ app.put('/update-employee/:id', (req, res) => {
 
 app.get('/delete-employee', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'delete-employee.html'));
+  
 });
 
 app.delete('/delete-employee/:id', (req, res) => {
@@ -69,9 +70,11 @@ app.delete('/delete-employee/:id', (req, res) => {
   if (employeeIndex !== -1) {
     const deletedEmployee = employees.splice(employeeIndex, 1)[0];
     res.json(deletedEmployee);
+    
   } else {
     res.status(404).json({ error: 'Employee not found' });
   }
+  res.redirect('/view-employees');
 });
 
 

@@ -7,9 +7,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+    <nav class="flex justify-end gap-1 items-center pt-3">
+        <a href="/view-employees">
+            <button class="bg-sky-400 text-white border-none rounded-md py-2 px-3 cursor-pointer">View Employees</button>
+        </a>
+    </nav>
+
     <div class="w-[50%] bg-gray-300 mt-5 mx-auto rounded-lg p-6">
     <h2 class="font-extrabold text-2xl">Delete Employee</h2>
-    <form id="deleteForm" action="/employees/:id" method="DELETE">
+    <form id="deleteForm" action="/delete-employee/:id" method="DELETE">
         <label for="id">Employee ID:</label><br>
         <input type="text" id="id" name="id" class="w-full border border-gray-300 rounded py-2 px-3" required><br><br>
 
@@ -24,7 +30,7 @@
             event.preventDefault();
             const formData = new FormData(deleteForm);
             const id = formData.get('id');
-            fetch(`/employees/${id}`, {
+            fetch(`/delete-employee/${id}`, {
                 method: 'DELETE'
             })
             .then(response => response.json())
