@@ -28,7 +28,7 @@
             .then(response => response.json())
             .then(employees => {
 
-                const employeeTable = document.createElement('table');  // Creating a new table element
+                const employeeTable = document.createElement('table');  
             employeeTable.innerHTML = `
                 <thead class="font-semibold bg-blue-400">
                     <tr >
@@ -48,10 +48,10 @@
                 </tbody>
             `;
             
-            const employeeListDiv = document.getElementById('employeeList');  // Getting the div where employee data will be displayed
-            employeeListDiv.appendChild(employeeTable);  // Appending the table to the main div
+            const employeeListDiv = document.getElementById('employeeList');  
+            employeeListDiv.appendChild(employeeTable);  
         })
-        .catch(error => console.error('Error fetching employees:', error));  // Handling errors
+        .catch(error => console.error('Error fetching employees:', error)); 
 
 
     </script>

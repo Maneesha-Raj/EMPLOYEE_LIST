@@ -27,13 +27,7 @@ app.get('/view-employees', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'view-employees.html'));
 });
 
-app.get('/update-employee', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'update-employee.html'));
-});
 
-app.get('/delete-employee', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'delete-employee.html'));
-});
 
 
 app.post('/add-employee', (req, res) => {
@@ -42,6 +36,10 @@ app.post('/add-employee', (req, res) => {
   employees.push(newEmployee);
   // res.status(201).json(newEmployee);
   res.redirect('/view-employees');
+});
+
+app.get('/update-employee', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'update-employee.html'));
 });
 
 app.put('/update-employee/:id', (req, res) => {
@@ -55,8 +53,14 @@ app.put('/update-employee/:id', (req, res) => {
   } else {
     res.status(404).json({ error: 'Employee not found' });
   }
+
+  res.redirect('/view-employees');
 });
 
+
+app.get('/delete-employee', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'delete-employee.html'));
+});
 
 app.delete('/delete-employee/:id', (req, res) => {
   const employeeId = parseInt(req.params.id);
