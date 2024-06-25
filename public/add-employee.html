@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="w-[50%] bg-gray-300 mt-5 mx-auto rounded-lg p-6">
+    <h2 class="font-extrabold text-2xl">Add Employee</h2>
+    <form action="/add-employee" method="POST">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" class="w-full border border-gray-300 rounded py-2 px-3" required><br><br>
+        
+        <label for="doj">Date of Joining:</label><br>
+        <input type="date" id="doj" name="doj" class="w-full border border-gray-300 rounded py-2 px-3" required><br><br>
+
+        <button type="submit" class="bg-sky-400 text-white py-2 px-4 rounded" >Add Employee</button>
+    </form>
+    </div>
+</body>
+</html>

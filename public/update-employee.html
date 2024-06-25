@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Employee</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="w-[50%] bg-gray-300 mt-5 mx-auto rounded-lg p-6">
+    <h2 class="font-extrabold text-2xl">Update Employee</h2>
+    <form id="updateForm" action="/employees/:id" method="PUT">
+        <label for="id">Employee ID:</label><br>
+        <input type="text" id="id" name="id" required class="w-full border border-gray-300 rounded py-2 px-3"><br><br>
+        
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" class="w-full border border-gray-300 rounded py-2 px-3" required><br><br>
+        
+        <label for="doj">Date Of Joining:</label><br>
+        <input type="date" id="doj" name="doj" class="w-full border border-gray-300 rounded py-2 px-3" required><br><br>
+
+        <button type="submit" class="bg-sky-400 text-white py-2 px-4 rounded" onclick="alert()">Update Employee</button>
+    </form>
+</div>
+
+    <script>
+        const updateForm = document.getElementById('updateForm');
+        updateForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(updateForm);
+            const id = formData.get('id');
+            fetch(`/employees/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: formData.get('name'),
+                    doj: formData.get('doj')
+                })
+            })
+            .then(response => response.json())
+            .then(updatedEmployee => {
+                alert('Employee updated successfully!');
+                updateForm.reset();
+            })
+            .catch(error => console.error('Error updating employee:', error));
+        });
+    </script>
+</body>
+</html>

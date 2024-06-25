@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <nav class="flex justify-end gap-1 items-center pt-3">
+        <a href="/add-employee">
+            <button class="bg-blue-600 text-white border-none rounded-md py-2 px-3 cursor-pointer">Add Employee</button>
+        </a>
+        <a href="/view-employees">
+            <button class="bg-sky-400 text-white border-none rounded-md py-2 px-3 cursor-pointer">View Employees</button>
+        </a>
+    </nav>
+    <h2 class="font-extrabold text-2xl">Employee Management System</h2>
+
+    <div class="w-[50%] bg-gray-300 mt-5 mx-auto rounded-lg p-6">
+    <h3 class="text-xl font-semibold mb-4">Search Employee by ID</h3>
+    <form id="searchForm">
+        <label for="searchId">Employee ID:</label><br>
+        <input type="text" id="searchId" name="searchId" required class="w-full border border-gray-300 rounded py-2 px-3"><br><br>
+        
+        <button type="submit" class="bg-sky-400 text-white py-2 px-4 rounded">Search</button>
+    </form>
+
+    </div>
+
+    <div id="employeeDetails" class="w-[50%] bg-white mt-5 mx-auto rounded-lg p-6">
+        <!--  -->
+    </div>
+
+    <script>
+        const searchForm = document.getElementById('searchForm');
+        const employeeDetailsDiv = document.getElementById('employeeDetails');
+
+        searchForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const searchId = document.getElementById('searchId').value;
+
+            fetch(`/employees/${searchId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Employee not found');
+                    }
+                    return response.json();
+                })
+                .then(employee => {
+                    const employeeDetails = `
+                        <h2 class="font-semibold">Employee Details</h2>
+                        <p>ID: ${employee.id}</p>
+                        <p>Name: ${employee.name}</p>
+                        <p>Department: ${employee.department}</p>
+                        
+                    `;
+                    employeeDetailsDiv.innerHTML = employeeDetails;
+                })
+                .catch(error => {
+                    console.error('Error searching employee:', error);
+                    employeeDetailsDiv.innerHTML = `<p>No employee found with ID ${searchId}</p>`;
+                });
+        });
+    </script>
+</body>
+</html>
